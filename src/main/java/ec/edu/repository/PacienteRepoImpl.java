@@ -40,17 +40,12 @@ public class PacienteRepoImpl implements IPacienteRepo {
 
 	@Override
 	public void actualizarPaciente(Paciente paciente) {
-		// Update paciente SET id = 2, nombre= 'javier', apellido = 'ortiz', edad 26
-		// where id=1
+
 		Object[] datosAActualizar = new Object[] { paciente.getId(), paciente.getNombre(), paciente.getApellido(),
 				paciente.getEdad(), paciente.getId() };
-		// Object[] datoAActualizar = new Object[]
-		// {paciente.getId(),paciente.getNombre(), paciente.getApellido(),
-		// paciente.getEdad(), paciente.getId()};
 		this.jdbcTemplate.update("update paciente set id=?,nombre= ?, apellido=?, edad=?  where id=?",
 				datosAActualizar);
-		// this.jdbcTemplate.update(" Update paciente SET id = ?, nombre= ?, apellido =
-		// ?, edad ? where id=?",datosAActualizar);
+
 	}
 
 	@Override
