@@ -20,10 +20,10 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 
 	@Autowired
 	private IGestorCitaService gestorCitaService;
-	
+
 	@Autowired
-	private  IGuardiaService guardiaService;
-	
+	private IGuardiaService guardiaService;
+
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoSpringJpaDtApplication.class, args);
 	}
@@ -58,7 +58,7 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 //		r1.setMedicamentos("Paracetamol");
 //		
 //		this.gestorCitaService.registrarNuevaConsulta(p1, r1);
-	
+
 //		Guardia g1 = new Guardia();
 //		g1.setNombre("Denis");
 //		g1.setApellido("mvn");
@@ -71,15 +71,24 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 //		g2.setEdificio("America");
 //		
 //		this.guardiaService.actualizarGuardia(g2);
-	
+
 //		Guardia g3 = this.guardiaService.buscar(3);
 //		System.out.println(g3);
 //		
 //		this.guardiaService.borrar(2);
 //		
-		Guardia g4 = this.guardiaService.buscarPorApellido("mvn");
+//		Guardia g4 = this.guardiaService.buscarPorApellidoLista("Tapia");
+//		System.out.println(g4);
+
+		
+		//Para typed
+//		Guardia g4 = this.guardiaService.buscarPorApellidoTyped("mvn");
+//		System.out.println(g4);
+		
+		//Para named
+		Guardia g4 = this.guardiaService.buscarPorApellidoNamed("mvn");
 		System.out.println(g4);
-	
+		
 	}
 
 }
