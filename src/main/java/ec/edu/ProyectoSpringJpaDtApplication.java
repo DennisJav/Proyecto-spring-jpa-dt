@@ -86,12 +86,14 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 //		System.out.println(g4);
 		
 		//Para named
-		Guardia g4 = this.guardiaService.buscarPorApellidoNamed("mvn");
-		System.out.println(g4);
+//		Guardia g4 = this.guardiaService.buscarPorApellidoNamed("mvn");
+//		System.out.println(g4);
 		
 		//TALLER 21
 		
-		
+		Guardia g4 = this.guardiaService.buscarPorApellidoNativeQuery("mvn");
+		System.out.println("Consulta con native query");
+		System.out.println(g4);
 		
 	}
 

@@ -11,4 +11,5 @@ public interface IGuardiaService {
 	Guardia buscarPorApellidoLista(String apellido);
 	Guardia buscarPorApellidoTyped(String apellido);
 	Guardia buscarPorApellidoNamed(String apellido);
+	Guardia buscarPorApellidoNativeQuery(String apellido);
 }

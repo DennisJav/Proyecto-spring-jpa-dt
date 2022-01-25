@@ -14,14 +14,14 @@ import javax.persistence.Table;
 //no hace diferenciacion la mayuscula
 
 //PARA VARIOS NAMED QUERY
-@NamedQueries({
-	@NamedQuery(name = "Guardia.buscarPorApellido", query = "select g from Guardia g where g.apellido = :valor"), // JAVA Persisstence
-	@NamedQuery(name = "Guardia.buscarPorApellido1", query = "select g from Guardia g where g.apellido = :valor") // JAVA Persisstence
-})
-//Declarar los Query de Guardia cuando es namedQuery
-@NamedQuery(name = "Guardia.buscarPorApellido", query = "select g from Guardia g where g.apellido = :valor") // JAVA Persisstence
-//  en el name es el estandar esa escritura
-// en query en JPQL
+//@NamedQueries({
+//	@NamedQuery(name = "Guardia.buscarPorApellido", query = "select g from Guardia g where g.apellido = :valor"), // JAVA Persisstence
+//	@NamedQuery(name = "Guardia.buscarPorApellido1", query = "select g from Guardia g where g.apellido = :valor") // JAVA Persisstence
+//})
+////Declarar los Query de Guardia cuando es namedQuery
+//@NamedQuery(name = "Guardia.buscarPorApellido", query = "select g from Guardia g where g.apellido = :valor") // JAVA Persisstence
+////  en el name es el estandar esa escritura
+//// en query en JPQL
 
 public class Guardia {
 	// tambien se debe dar metadata a los atributos
