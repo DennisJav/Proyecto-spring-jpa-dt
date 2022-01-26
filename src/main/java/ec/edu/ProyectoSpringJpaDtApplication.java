@@ -1,5 +1,9 @@
 package ec.edu;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -8,13 +12,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import ec.edu.modelo.Paciente;
 import ec.edu.modelo.Receta;
 import ec.edu.modelo.jpa.Guardia;
+import ec.edu.repository.jpa.GuardiaRepoImpl;
 import ec.edu.service.IGestorCitaService;
 import ec.edu.service.IGuardiaService;
-import ec.edu.service.IPacienteService;
+
 
 @SpringBootApplication
 public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 
+
+	public static final Logger LOG = LoggerFactory.getLogger(ProyectoSpringJpaDtApplication.class);
+	
 //	@Autowired
 //	private IPacienteService pacienteService;
 
@@ -61,8 +69,8 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 
 //		Guardia g1 = new Guardia();
 //		g1.setNombre("Denis");
-//		g1.setApellido("mvn");
-//		g1.setEdificio("Amazonas");	
+//		g1.setApellido("MVN2");
+//		g1.setEdificio("JAVA2");	
 //		this.guardiaService.guardarGuardia(g1);
 //		Guardia g2 = new Guardia();
 //		g2.setId(3);
@@ -86,12 +94,27 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 //		System.out.println(g4);
 		
 		//Para named
-		Guardia g4 = this.guardiaService.buscarPorApellidoNamed("mvn");
-		System.out.println(g4);
+//		Guardia g4 = this.guardiaService.buscarPorApellidoNamed("mvn");
+//		System.out.println(g4);
+	
+		//TALLER 22
+//		Guardia g4 = this.guardiaService.buscarPorApellidoNamedNative("mvn");
+//		System.out.println(g4);
 		
-		//TALLER 21
+//		Guardia g4 = this.guardiaService.buscarPorApellidoCriteriaAPI("mvn");
+//		System.out.println(g4);
+//		
+//		Guardia g4 = this.guardiaService.buscarPorApellidoCriteriaAPIAND("MVN2","JAVA2");
+//		System.out.println(g4);
 		
+//		Guardia g4 = this.guardiaService.buscarPorApellidoCriteriaAPIOR("MVN4","JAVA2");
+//		LOG.info("ESTE ES EL GUARDIA: " + g4);
 		
+		List<Guardia> listaGuardia = this.guardiaService.buscarPorApellidoCriteriaAPIOR("Tapia","JAVA2");
+		for(Guardia g: listaGuardia) {
+			LOG.info("ESTE ES EL GUARDIA: " + g);
+		
+		}
 		
 	}
 

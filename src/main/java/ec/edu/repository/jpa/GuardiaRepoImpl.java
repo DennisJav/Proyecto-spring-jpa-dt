@@ -7,6 +7,10 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
@@ -104,12 +108,100 @@ public class GuardiaRepoImpl implements IGuardiaRepo {
 		return miTypedQuery.getSingleResult();
 	}
 
+//METODOS PARA NATIVE 
 	@Override
 	public Guardia buscarGuardiaPorApellidoNamed(String apellido) {
 
 		Query miQuery = this.entityManager.createNamedQuery("Guardia.buscarPorApellido");
 		miQuery.setParameter("valor", apellido);
 		return (Guardia) miQuery.getSingleResult();
+	}
+
+	// el llamado para el native named es exactamente igual al llamado de un named
+	// query
+	@Override
+	public Guardia buscarGuardiaPorApellidoNamedNative(String apellido) {
+		// TODO Auto-generated method stub
+		Query miQuery = this.entityManager.createNamedQuery("Guardia.buscarPorApellidoNative", Guardia.class);
+		miQuery.setParameter("valor", apellido);
+		return (Guardia) miQuery.getSingleResult();
+	}
+
+//PARA CITRERIA API
+	// versatibilidad
+	// es mas pesado
+	//
+	@Override
+	public Guardia buscarGuardiaPorApellidoCriteriaAPI(String apellido) {
+
+		CriteriaBuilder myCriteria = this.entityManager.getCriteriaBuilder(); // retorna un criteria builder
+		// Creo el query que retorna un guardia
+		CriteriaQuery<Guardia> myQuery = myCriteria.createQuery(Guardia.class);
+		// Aqui se empieza a construir el sql
+		// le especifico de entidad que representa la tabla, el from de guardia clas
+		Root<Guardia> myTabla = myQuery.from(Guardia.class);
+		// Los where en criteria API se los conoce como PREDICADO
+		// select g from Guardia g where g.apellido = :valor
+		// el where nos pide sentencia que comparan dos valores (equal)
+		Predicate p1 = myCriteria.equal(myTabla.get("apellido"), apellido);
+		// para hacer dos predicados pero se necesita mas dinamica
+		// Predicate p2 = myCriteria.equal(myTabla.get("apellido"),apellido);
+		// Empezamos a conformar el select
+		myQuery.select(myTabla).where(p1);
+
+		TypedQuery<Guardia> typedQuery = this.entityManager.createQuery(myQuery);
+
+		return typedQuery.getSingleResult();
+	}
+
+	@Override
+	public Guardia buscarGuardiaPorApellidoCriteriaAPIAND(String apellido, String edificio) {
+		
+		//select * from guardia where nombre = 'mvn' and edificio = 'Amazonas';
+		//select * from guardia where nombre = 'mvn' or edificio = 'Amazonas';
+		
+		CriteriaBuilder myCriteria = this.entityManager.getCriteriaBuilder(); // retorna un criteria builder
+		CriteriaQuery<Guardia> myQuery = myCriteria.createQuery(Guardia.class);
+		Root<Guardia> myTabla = myQuery.from(Guardia.class);
+	
+		//CREAMOS LOS PREDICADOS
+		Predicate p1 = myCriteria.equal(myTabla.get("apellido"), apellido);
+		Predicate p2 = myCriteria.equal(myTabla.get("edificio"), edificio);
+		//UNION DE LOS DOS PREDICADOS
+		Predicate predicadofinal = myCriteria.and(p1,p2);
+		//EMPEZAMOS A FORMAR EL SELECT
+		//Cuando mandamos la  , por defecto es and
+		//se recomienda crear un predicado espedicifo para and y or
+		myQuery.select(myTabla).where(predicadofinal);
+
+		TypedQuery<Guardia> typedQuery = this.entityManager.createQuery(myQuery);
+
+		return typedQuery.getSingleResult();
+	
+	}
+
+	@Override
+	public List <Guardia> buscarGuardiaPorApellidoCriteriaAPIOR(String apellido, String edificio) {
+		//select * from guardia where nombre = 'mvn' and edificio = 'Amazonas';
+		//select * from guardia where nombre = 'mvn' or edificio = 'Amazonas';
+		
+		CriteriaBuilder myCriteria = this.entityManager.getCriteriaBuilder(); // retorna un criteria builder
+		CriteriaQuery<Guardia> myQuery = myCriteria.createQuery(Guardia.class);
+		Root<Guardia> myTabla = myQuery.from(Guardia.class);
+	
+		//CREAMOS LOS PREDICADOS
+		Predicate p1 = myCriteria.equal(myTabla.get("apellido"), apellido);
+		Predicate p2 = myCriteria.equal(myTabla.get("edificio"), edificio);
+		//UNION DE LOS DOS PREDICADOS
+		Predicate predicadofinal = myCriteria.or(p1,p2);
+		//EMPEZAMOS A FORMAR EL SELECT
+		//Cuando mandamos la  , por defecto es and
+		//se recomienda crear un predicado espedicifo para and y or
+		myQuery.select(myTabla).where(predicadofinal);
+
+		TypedQuery<Guardia> typedQuery = this.entityManager.createQuery(myQuery);
+
+		return typedQuery.getResultList();
 	}
 
 }

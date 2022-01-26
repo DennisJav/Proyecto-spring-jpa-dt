@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -14,14 +16,19 @@ import javax.persistence.Table;
 //no hace diferenciacion la mayuscula
 
 //PARA VARIOS NAMED QUERY
+//Reutilizable
+//Facil Mantenimiento
 @NamedQueries({
 	@NamedQuery(name = "Guardia.buscarPorApellido", query = "select g from Guardia g where g.apellido = :valor"), // JAVA Persisstence
 	@NamedQuery(name = "Guardia.buscarPorApellido1", query = "select g from Guardia g where g.apellido = :valor") // JAVA Persisstence
 })
 //Declarar los Query de Guardia cuando es namedQuery
-@NamedQuery(name = "Guardia.buscarPorApellido", query = "select g from Guardia g where g.apellido = :valor") // JAVA Persisstence
+@NamedQuery(name = "Guardia.buscarPorApellido2", query = "select g from Guardia g where g.apellido = :valor") // JAVA Persisstence
 //  en el name es el estandar esa escritura
 // en query en JPQL
+
+//PARA NATIVE NAMED QUERY
+@NamedNativeQuery(name = "Guardia.buscarPorApellidoNative", query = "select * from guardia g where g.apellido = :valor", resultClass = Guardia.class)
 
 public class Guardia {
 	// tambien se debe dar metadata a los atributos
@@ -75,7 +82,8 @@ public class Guardia {
 
 	@Override
 	public String toString() {
-		return "Guardia [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + "]";
+		return "Guardia [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", edificio=" + edificio + "]";
 	}
 
+	
 }

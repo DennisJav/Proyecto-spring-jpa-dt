@@ -1,5 +1,7 @@
 package ec.edu.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,5 +63,30 @@ public class GuardiaServiceImpl implements IGuardiaService {
 		// TODO Auto-generated method stub
 		return this.guardiaRepo.buscarGuardiaPorApellidoNamed(apellido);
 	}
+
+	@Override
+	public Guardia buscarPorApellidoNamedNative(String apellido) {
+		// TODO Auto-generated method stub
+		return this.guardiaRepo.buscarGuardiaPorApellidoNamedNative(apellido);
+	}
+
+	@Override
+	public Guardia buscarPorApellidoCriteriaAPI(String apellido) {
+		// TODO Auto-generated method stub
+		return this.guardiaRepo.buscarGuardiaPorApellidoCriteriaAPI(apellido);
+	}
+
+	@Override
+	public Guardia buscarPorApellidoCriteriaAPIAND(String apellido, String edificio) {
+		// TODO Auto-generated method stub
+		return this.guardiaRepo.buscarGuardiaPorApellidoCriteriaAPIAND(apellido, edificio);
+	}
+
+	@Override
+	public List<Guardia> buscarPorApellidoCriteriaAPIOR(String apellido, String edificio) {
+		// TODO Auto-generated method stub
+		return this.guardiaRepo.buscarGuardiaPorApellidoCriteriaAPIOR(apellido, edificio);
+	}
+
 
 }

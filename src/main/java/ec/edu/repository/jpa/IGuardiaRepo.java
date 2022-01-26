@@ -1,5 +1,7 @@
 package ec.edu.repository.jpa;
 
+import java.util.List;
+
 import ec.edu.modelo.jpa.Guardia;
 
 public interface IGuardiaRepo {
@@ -18,5 +20,13 @@ public interface IGuardiaRepo {
 	Guardia buscarGuardiaPorApellidoType(String apellido);
 	
 	Guardia buscarGuardiaPorApellidoNamed(String apellido);
+	
+	Guardia buscarGuardiaPorApellidoNamedNative(String apellido);
+	
+	Guardia buscarGuardiaPorApellidoCriteriaAPI(String apellido);
+	
+	Guardia buscarGuardiaPorApellidoCriteriaAPIAND(String apellido, String edificio);
+	
+	List<Guardia> buscarGuardiaPorApellidoCriteriaAPIOR(String apellido, String edificio);
 	
 }
