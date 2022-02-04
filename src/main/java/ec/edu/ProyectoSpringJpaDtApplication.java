@@ -1,5 +1,11 @@
 package ec.edu;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -7,7 +13,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import ec.edu.modelo.Paciente;
 import ec.edu.modelo.Receta;
+import ec.edu.modelo.jpa.DetalleFactura;
+import ec.edu.modelo.jpa.Factura;
 import ec.edu.modelo.jpa.Guardia;
+import ec.edu.service.IFacturaService;
 import ec.edu.service.IGestorCitaService;
 import ec.edu.service.IGuardiaService;
 import ec.edu.service.IPacienteService;
@@ -23,6 +32,8 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 
 	@Autowired
 	private IGuardiaService guardiaService;
+	@Autowired
+	private IFacturaService facturaService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoSpringJpaDtApplication.class, args);
@@ -86,12 +97,41 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 //		System.out.println(g4);
 		
 		//Para named
-		Guardia g4 = this.guardiaService.buscarPorApellidoNamed("mvn");
-		System.out.println(g4);
+//		Guardia g4 = this.guardiaService.buscarPorApellidoNamed("mvn");
+//		System.out.println(g4);
+//		
+//		//TALLER 23
+
 		
-		//TALLER 21
+		Factura miFactura = new Factura();
+		miFactura.setCedula("1213213");
+		LocalDateTime miFecha = LocalDateTime.of(1989, Month.AUGUST,8,12,45);
+		// Para fecha actual LocalDateTime.now();
+		miFactura.setFecha(miFecha);
+		miFactura.setNumero("12121-23223");
 		
+		//Vamos a construir la lista de detalles
+		List<DetalleFactura> detalles =  new ArrayList<>();
 		
+		//Primer detalle
+		DetalleFactura d1 = new DetalleFactura();
+		d1.setCantidad(3);
+		d1.setPrecio(new BigDecimal(3.22));
+		d1.setFactura(miFactura);
+		
+		detalles.add(d1);
+		
+		//Primer detalle
+		DetalleFactura d2 = new DetalleFactura();
+		d2.setCantidad(10);
+		d2.setPrecio(new BigDecimal(9.99));
+		d2.setFactura(miFactura);
+		
+		detalles.add(d2);
+		
+		miFactura.setDetalles(detalles);
+		
+		this.facturaService.guardarFactura(miFactura);
 		
 	}
 
