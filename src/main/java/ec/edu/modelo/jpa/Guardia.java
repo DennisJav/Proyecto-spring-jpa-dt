@@ -19,7 +19,7 @@ import javax.persistence.Table;
 	@NamedQuery(name = "Guardia.buscarPorApellido1", query = "select g from Guardia g where g.apellido = :valor") // JAVA Persisstence
 })
 //Declarar los Query de Guardia cuando es namedQuery
-@NamedQuery(name = "Guardia.buscarPorApellido", query = "select g from Guardia g where g.apellido = :valor") // JAVA Persisstence
+@NamedQuery(name = "Guardia.buscarPorApellido2", query = "select g from Guardia g where g.apellido = :valor") // JAVA Persisstence
 //  en el name es el estandar esa escritura
 // en query en JPQL
 
