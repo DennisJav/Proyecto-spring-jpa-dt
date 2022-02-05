@@ -1,5 +1,6 @@
 package ec.edu.modelo.jpa;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class Ciudadano {
 	@Column(name="ciud_apellido")
 	private String apellido;
 
-	@OneToOne(mappedBy = "ciudadano")
+	@OneToOne(mappedBy = "ciudadano",cascade=CascadeType.ALL)
 	private Empleado empleado;
 	
 	//metods set y get

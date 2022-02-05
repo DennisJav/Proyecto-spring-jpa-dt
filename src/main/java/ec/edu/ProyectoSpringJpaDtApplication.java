@@ -145,9 +145,11 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 		ciudadano1.setNombre("Dennis");
 		ciudadano1.setApellido("Tapia");
 		
+		
 		Empleado empleado = new Empleado();
 		empleado.setIess("123245aaa");
 		empleado.setSalario(new BigDecimal(252.36));
+	
 		empleado.setCiudadano(ciudadano1);
 		
 		ciudadano1.setEmpleado(empleado);
