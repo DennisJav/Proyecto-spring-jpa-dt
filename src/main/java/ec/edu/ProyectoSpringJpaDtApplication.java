@@ -13,9 +13,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import ec.edu.modelo.Paciente;
 import ec.edu.modelo.Receta;
+import ec.edu.modelo.jpa.Ciudadano;
 import ec.edu.modelo.jpa.DetalleFactura;
+import ec.edu.modelo.jpa.Empleado;
 import ec.edu.modelo.jpa.Factura;
 import ec.edu.modelo.jpa.Guardia;
+import ec.edu.service.ICiudadanoService;
 import ec.edu.service.IFacturaService;
 import ec.edu.service.IGestorCitaService;
 import ec.edu.service.IGuardiaService;
@@ -34,6 +37,9 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 	private IGuardiaService guardiaService;
 	@Autowired
 	private IFacturaService facturaService;
+	
+	@Autowired
+	private ICiudadanoService ciudadanoService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoSpringJpaDtApplication.class, args);
@@ -103,35 +109,50 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 //		//TALLER 23
 
 		
-		Factura miFactura = new Factura();
-		miFactura.setCedula("1213213");
-		LocalDateTime miFecha = LocalDateTime.of(1989, Month.AUGUST,8,12,45);
-		// Para fecha actual LocalDateTime.now();
-		miFactura.setFecha(miFecha);
-		miFactura.setNumero("12121-23223");
+//		Factura miFactura = new Factura();
+//		miFactura.setCedula("1213213");
+//		LocalDateTime miFecha = LocalDateTime.of(1989, Month.AUGUST,8,12,45);
+//		// Para fecha actual LocalDateTime.now();
+//		miFactura.setFecha(miFecha);
+//		miFactura.setNumero("12121-23223");
 		
 		//Vamos a construir la lista de detalles
-		List<DetalleFactura> detalles =  new ArrayList<>();
+//		List<DetalleFactura> detalles =  new ArrayList<>();
 		
 		//Primer detalle
-		DetalleFactura d1 = new DetalleFactura();
-		d1.setCantidad(3);
-		d1.setPrecio(new BigDecimal(3.22));
-		d1.setFactura(miFactura);
+//		DetalleFactura d1 = new DetalleFactura();
+//		d1.setCantidad(3);
+//		d1.setPrecio(new BigDecimal(3.22));
+//		d1.setFactura(miFactura);
+//		
+//		detalles.add(d1);
+//		
+//		//Primer detalle
+//		DetalleFactura d2 = new DetalleFactura();
+//		d2.setCantidad(10);
+//		d2.setPrecio(new BigDecimal(9.99));
+//		d2.setFactura(miFactura);
+//		
+//		detalles.add(d2);
+//		
+//		miFactura.setDetalles(detalles);
+//		
+//		this.facturaService.guardarFactura(miFactura);
 		
-		detalles.add(d1);
+		//Taller 24
 		
-		//Primer detalle
-		DetalleFactura d2 = new DetalleFactura();
-		d2.setCantidad(10);
-		d2.setPrecio(new BigDecimal(9.99));
-		d2.setFactura(miFactura);
+		Ciudadano ciudadano1 = new Ciudadano();
+		ciudadano1.setNombre("Dennis");
+		ciudadano1.setApellido("Tapia");
 		
-		detalles.add(d2);
+		Empleado empleado = new Empleado();
+		empleado.setIess("123245aaa");
+		empleado.setSalario(new BigDecimal(252.36));
+		empleado.setCiudadano(ciudadano1);
 		
-		miFactura.setDetalles(detalles);
+		ciudadano1.setEmpleado(empleado);
 		
-		this.facturaService.guardarFactura(miFactura);
+		this.ciudadanoService.guardarCiudadano(ciudadano1);
 		
 	}
 
