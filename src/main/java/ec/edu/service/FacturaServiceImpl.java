@@ -27,6 +27,10 @@ public class FacturaServiceImpl implements IFacturaService{
 	public List<Factura> buscarFacturaJoinLeft(LocalDateTime fecha) {
 		return this.facturaRepo.buscarPorFechaJoinLeft(fecha);
 	}
+	@Override
+	public List<Factura> buscarFacturaWhere(LocalDateTime fecha) {
+		return this.facturaRepo.buscarPorFechaWhere(fecha);
+	}
 	
 
 }
