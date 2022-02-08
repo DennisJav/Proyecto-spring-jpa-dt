@@ -9,4 +9,5 @@ public interface IFacturaRepo {
 	void insertarFactura(Factura factura);
 	List<Factura> buscarPorFechaJoin(LocalDateTime fecha);
 	List<Factura> buscarPorFechaJoinLeft(LocalDateTime fecha);
+	List<Factura> buscarPorFechaWhere(LocalDateTime fecha);
 }

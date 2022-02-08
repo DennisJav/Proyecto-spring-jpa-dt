@@ -38,11 +38,11 @@ public class Factura {
 	private LocalDateTime fecha;
 
 //	@UnoaMuchos()
-//	@OneToMany(mappedBy = "factura",cascade=CascadeType.ALL, fetch = FetchType.EAGER) //FECTH CARGA A LOS HIJOS LOS PRECARGA
-//	private List<DetalleFactura> detalles;
-//	
-	@OneToMany(mappedBy = "factura",cascade=CascadeType.ALL) //FECTH CARGA A LOS HIJOS LOS PRECARGA
+	@OneToMany(mappedBy = "factura",cascade=CascadeType.ALL, fetch = FetchType.EAGER) //FECTH CARGA A LOS HIJOS LOS PRECARGA
 	private List<DetalleFactura> detalles;
+////	
+//	@OneToMany(mappedBy = "factura",cascade=CascadeType.ALL) //FECTH CARGA A LOS HIJOS LOS PRECARGA
+//	private List<DetalleFactura> detalles;
 	
 	
 	public List<DetalleFactura> getDetalles() {
