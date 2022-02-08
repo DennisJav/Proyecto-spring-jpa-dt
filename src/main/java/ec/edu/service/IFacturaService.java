@@ -9,4 +9,5 @@ public interface IFacturaService {
 	void guardarFactura(Factura factura);
 	List<Factura> buscarFacturaJoin(LocalDateTime fecha);
 	List<Factura> buscarFacturaJoinLeft(LocalDateTime fecha);
+	List<Factura> buscarFacturaWhere(LocalDateTime fecha);
 }
