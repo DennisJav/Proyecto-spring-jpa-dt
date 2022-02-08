@@ -170,21 +170,24 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 //			LOG.info("Factura Encontrada"+f);
 //			//LOG.info(f.toString());
 //		}
-//		
+		
 		
 //		List<Factura> listaFactura1 = this.facturaService.buscarFacturaJoinLeft(miFecha);
 //		for(Factura f1: listaFactura1) {
 //			LOG.info("Factura Encontrada"+f1);
 //		}
 		
+//		
+//		LocalDateTime miFecha = LocalDateTime.of(1989, Month.AUGUST,8,2,2);
+//		List<Factura> listaFactura = this.facturaService.buscarFacturaWhere(miFecha);
+//	//	LOG.info("longitud"+listaFactura.size());
+//		for(Factura f: listaFactura) {
+//			//LOG.info("Factura Encontrada"+f);
+//			LOG.info(f.toString());
+//		}
+//		
 		
-		LocalDateTime miFecha = LocalDateTime.of(1989, Month.AUGUST,8,2,2);
-		List<Factura> listaFactura = this.facturaService.buscarFacturaWhere(miFecha);
-	//	LOG.info("longitud"+listaFactura.size());
-		for(Factura f: listaFactura) {
-			//LOG.info("Factura Encontrada"+f);
-			LOG.info(f.toString());
-		}
+		//TALLER 26
 		
 		
 		
