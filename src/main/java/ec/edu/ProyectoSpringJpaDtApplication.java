@@ -6,6 +6,8 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -27,6 +29,7 @@ import ec.edu.service.IPacienteService;
 @SpringBootApplication
 public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 
+	public static final Logger LOG = LoggerFactory.getLogger(ProyectoSpringJpaDtApplication.class);
 //	@Autowired
 //	private IPacienteService pacienteService;
 
@@ -141,20 +144,38 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 		
 		//Taller 24
 		
-		Ciudadano ciudadano1 = new Ciudadano();
-		ciudadano1.setNombre("Dennis");
-		ciudadano1.setApellido("Tapia");
+//		Ciudadano ciudadano1 = new Ciudadano();
+//		ciudadano1.setNombre("Dennis");
+//		ciudadano1.setApellido("Tapia");
+//		
+//		
+//		Empleado empleado = new Empleado();
+//		empleado.setIess("123245aaa");
+//		empleado.setSalario(new BigDecimal(252.36));
+//	
+//		empleado.setCiudadano(ciudadano1);
+//		
+//		ciudadano1.setEmpleado(empleado);
+//		
+//		this.ciudadanoService.guardarCiudadano(ciudadano1);
+		
+		//Taller 25
+		
+
+		
+		LocalDateTime miFecha = LocalDateTime.of(1989, Month.AUGUST,8,2,5);
+		List<Factura> listaFactura = this.facturaService.buscarFacturaJoin(miFecha);
+		LOG.info("longitud"+listaFactura.size());
+		for(Factura f: listaFactura) {
+			LOG.info("Factura Encontrada"+f);
+			//LOG.info(f.toString());
+		}
 		
 		
-		Empleado empleado = new Empleado();
-		empleado.setIess("123245aaa");
-		empleado.setSalario(new BigDecimal(252.36));
-	
-		empleado.setCiudadano(ciudadano1);
-		
-		ciudadano1.setEmpleado(empleado);
-		
-		this.ciudadanoService.guardarCiudadano(ciudadano1);
+//		List<Factura> listaFactura1 = this.facturaService.buscarFacturaJoinLeft(miFecha);
+//		for(Factura f1: listaFactura1) {
+//			LOG.info("Factura Encontrada"+f1);
+//		}
 		
 	}
 
