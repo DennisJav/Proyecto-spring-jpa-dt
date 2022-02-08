@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +18,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "factura")
 public class Factura {
+	
+	
+	
+	
 	@Id
 	@Column(name = "fact_id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = ("seq_fatura"))
@@ -33,7 +38,10 @@ public class Factura {
 	private LocalDateTime fecha;
 
 //	@UnoaMuchos()
-	@OneToMany(mappedBy = "factura",cascade=CascadeType.ALL)
+//	@OneToMany(mappedBy = "factura",cascade=CascadeType.ALL, fetch = FetchType.EAGER) //FECTH CARGA A LOS HIJOS LOS PRECARGA
+//	private List<DetalleFactura> detalles;
+//	
+	@OneToMany(mappedBy = "factura",cascade=CascadeType.ALL) //FECTH CARGA A LOS HIJOS LOS PRECARGA
 	private List<DetalleFactura> detalles;
 	
 	
@@ -79,9 +87,19 @@ public class Factura {
 
 	@Override
 	public String toString() {
-		return "Factura [id=" + id + ", cedula=" + cedula + ", numero=" + numero + ", fecha=" + fecha + "]";
+		return "Factura [id=" + id + ", cedula=" + cedula + ", numero=" + numero + ", fecha=" + fecha + ", detalles="
+				+ detalles + "]";
+		//Aniadir el fecth
 	}
+
+//	@Override
+//	public String toString() {
+//		return "Factura [id=" + id + ", cedula=" + cedula + ", numero=" + numero + ", fecha=" + fecha + ", ]";
+//		//EL DETALLE o EL HIJO NO VIEN CARGADO 
+//	}
+
 	
+
 	
 	
 	

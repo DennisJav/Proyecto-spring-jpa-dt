@@ -6,6 +6,8 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,9 +15,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import ec.edu.modelo.Paciente;
 import ec.edu.modelo.Receta;
+import ec.edu.modelo.jpa.Ciudadano;
 import ec.edu.modelo.jpa.DetalleFactura;
+import ec.edu.modelo.jpa.Empleado;
 import ec.edu.modelo.jpa.Factura;
 import ec.edu.modelo.jpa.Guardia;
+import ec.edu.service.ICiudadanoService;
 import ec.edu.service.IFacturaService;
 import ec.edu.service.IGestorCitaService;
 import ec.edu.service.IGuardiaService;
@@ -24,6 +29,7 @@ import ec.edu.service.IPacienteService;
 @SpringBootApplication
 public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 
+	public static final Logger LOG = LoggerFactory.getLogger(ProyectoSpringJpaDtApplication.class);
 //	@Autowired
 //	private IPacienteService pacienteService;
 
@@ -34,6 +40,9 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 	private IGuardiaService guardiaService;
 	@Autowired
 	private IFacturaService facturaService;
+	
+	@Autowired
+	private ICiudadanoService ciudadanoService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoSpringJpaDtApplication.class, args);
@@ -103,35 +112,70 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 //		//TALLER 23
 
 		
-		Factura miFactura = new Factura();
-		miFactura.setCedula("1213213");
-		LocalDateTime miFecha = LocalDateTime.of(1989, Month.AUGUST,8,12,45);
-		// Para fecha actual LocalDateTime.now();
-		miFactura.setFecha(miFecha);
-		miFactura.setNumero("12121-23223");
+//		Factura miFactura = new Factura();
+//		miFactura.setCedula("1213213");
+//		LocalDateTime miFecha = LocalDateTime.of(1989, Month.AUGUST,8,12,45);
+//		// Para fecha actual LocalDateTime.now();
+//		miFactura.setFecha(miFecha);
+//		miFactura.setNumero("12121-23223");
 		
 		//Vamos a construir la lista de detalles
-		List<DetalleFactura> detalles =  new ArrayList<>();
+//		List<DetalleFactura> detalles =  new ArrayList<>();
 		
 		//Primer detalle
-		DetalleFactura d1 = new DetalleFactura();
-		d1.setCantidad(3);
-		d1.setPrecio(new BigDecimal(3.22));
-		d1.setFactura(miFactura);
+//		DetalleFactura d1 = new DetalleFactura();
+//		d1.setCantidad(3);
+//		d1.setPrecio(new BigDecimal(3.22));
+//		d1.setFactura(miFactura);
+//		
+//		detalles.add(d1);
+//		
+//		//Primer detalle
+//		DetalleFactura d2 = new DetalleFactura();
+//		d2.setCantidad(10);
+//		d2.setPrecio(new BigDecimal(9.99));
+//		d2.setFactura(miFactura);
+//		
+//		detalles.add(d2);
+//		
+//		miFactura.setDetalles(detalles);
+//		
+//		this.facturaService.guardarFactura(miFactura);
 		
-		detalles.add(d1);
+		//Taller 24
 		
-		//Primer detalle
-		DetalleFactura d2 = new DetalleFactura();
-		d2.setCantidad(10);
-		d2.setPrecio(new BigDecimal(9.99));
-		d2.setFactura(miFactura);
+//		Ciudadano ciudadano1 = new Ciudadano();
+//		ciudadano1.setNombre("Dennis");
+//		ciudadano1.setApellido("Tapia");
+//		
+//		
+//		Empleado empleado = new Empleado();
+//		empleado.setIess("123245aaa");
+//		empleado.setSalario(new BigDecimal(252.36));
+//	
+//		empleado.setCiudadano(ciudadano1);
+//		
+//		ciudadano1.setEmpleado(empleado);
+//		
+//		this.ciudadanoService.guardarCiudadano(ciudadano1);
 		
-		detalles.add(d2);
+		//Taller 25
 		
-		miFactura.setDetalles(detalles);
+
 		
-		this.facturaService.guardarFactura(miFactura);
+		LocalDateTime miFecha = LocalDateTime.of(1989, Month.AUGUST,8,2,5);
+		List<Factura> listaFactura = this.facturaService.buscarFacturaJoin(miFecha);
+		LOG.info("longitud"+listaFactura.size());
+		for(Factura f: listaFactura) {
+			LOG.info("Factura Encontrada"+f);
+			//LOG.info(f.toString());
+		}
+		
+		
+//		List<Factura> listaFactura1 = this.facturaService.buscarFacturaJoinLeft(miFecha);
+//		for(Factura f1: listaFactura1) {
+//			LOG.info("Factura Encontrada"+f1);
+//		}
 		
 	}
 
