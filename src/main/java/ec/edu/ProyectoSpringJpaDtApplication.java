@@ -16,11 +16,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import ec.edu.modelo.Paciente;
 import ec.edu.modelo.Receta;
 import ec.edu.modelo.jpa.Ciudadano;
+import ec.edu.modelo.jpa.Cliente;
 import ec.edu.modelo.jpa.DetalleFactura;
 import ec.edu.modelo.jpa.Empleado;
 import ec.edu.modelo.jpa.Factura;
+import ec.edu.modelo.jpa.FacturaSencilla;
 import ec.edu.modelo.jpa.Guardia;
 import ec.edu.service.ICiudadanoService;
+import ec.edu.service.IClienteService;
+import ec.edu.service.IDetalleFacturaService;
 import ec.edu.service.IFacturaService;
 import ec.edu.service.IGestorCitaService;
 import ec.edu.service.IGuardiaService;
@@ -43,6 +47,12 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 	
 	@Autowired
 	private ICiudadanoService ciudadanoService;
+	
+	@Autowired
+	private IDetalleFacturaService detalleFacturaService;
+	
+	@Autowired 
+	private IClienteService clienteService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoSpringJpaDtApplication.class, args);
@@ -190,7 +200,29 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 		//TALLER 26
 		
 		
+		 //FETCH
+		System.out.println("SELECT CON FETCH");
+		LocalDateTime miFecha = LocalDateTime.of(1989, Month.AUGUST,8,2,5);
+		List<Factura> listaFactura = this.facturaService.buscarFacturaJoinFetch(miFecha);
+
+		List<DetalleFactura> listaDetalleFacturas = this.detalleFacturaService.buscarDetallePorPrecio(new BigDecimal(7) , miFecha);
+
+		//COLECTION
+		System.out.println("COLECCION");
+		Cliente cliente=new Cliente();
+		cliente.setNombre("Javier");
+		List<String> tel = new ArrayList<>();
+		tel.add("0963321015");
+		tel.add("222565651");
 		
+		cliente.setTelefonos(tel);
+		
+		this.clienteService.guardarCliente(cliente);
+		
+		
+		//FACTURATO
+		System.out.println("FACTURA SENCILLA");
+		List<FacturaSencilla> listaFacSencilla = this.facturaService.buscarFacturaSencilla(miFecha);
 		
 	}
 
