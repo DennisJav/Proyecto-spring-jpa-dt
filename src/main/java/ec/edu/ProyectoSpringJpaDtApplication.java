@@ -263,6 +263,7 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 		c1.setSaldo(new BigDecimal(1000));
 		c1.setTipo("Ahorros");
 		
+		this.cuentaBancariaService.crearCuentaBancaria(c1);
 		
 		CuentaBancaria c2 = new CuentaBancaria();
 		
@@ -271,7 +272,7 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 		c2.setSaldo(new BigDecimal(100));
 		c2.setTipo("Corriente");
 		
-		
+		this.cuentaBancariaService.crearCuentaBancaria(c2);
 	}
 
 }
