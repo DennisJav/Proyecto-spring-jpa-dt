@@ -18,6 +18,7 @@ import ec.edu.modelo.Receta;
 import ec.edu.modelo.Turista;
 import ec.edu.modelo.jpa.Ciudadano;
 import ec.edu.modelo.jpa.Cliente;
+import ec.edu.modelo.jpa.CuentaBancaria;
 import ec.edu.modelo.jpa.DetalleFactura;
 import ec.edu.modelo.jpa.Empleado;
 import ec.edu.modelo.jpa.Factura;
@@ -25,6 +26,7 @@ import ec.edu.modelo.jpa.FacturaSencilla;
 import ec.edu.modelo.jpa.Guardia;
 import ec.edu.service.ICiudadanoService;
 import ec.edu.service.IClienteService;
+import ec.edu.service.ICuentaBancariaService;
 import ec.edu.service.IDetalleFacturaService;
 import ec.edu.service.IFacturaService;
 import ec.edu.service.IGestorCitaService;
@@ -58,6 +60,9 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 	
 	@Autowired
 	private ITuristaService turistaService;
+	
+	@Autowired
+	private ICuentaBancariaService cuentaBancariaService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoSpringJpaDtApplication.class, args);
@@ -232,21 +237,40 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 		
 		//Taller 27
 		
-		Turista tur1=new Turista();
-		tur1.setNombre("Denis");
-		//tur1.setSaldo(new BigDecimal(121));
-		tur1.setAbono(new BigDecimal(12));
-		tur1.setValor(new BigDecimal(110));
-				
+//		Turista tur1=new Turista();
+//		tur1.setNombre("Denis");
+//		//tur1.setSaldo(new BigDecimal(121));
+//		tur1.setAbono(new BigDecimal(12));
+//		tur1.setValor(new BigDecimal(110));
+//				
+//		
+//		this.turistaService.guardarTurista(tur1);
+//		List<Turista> listaTurista = this.turistaService.obtenerTodosTuristas("Denis");
+//        for(Turista t : listaTurista) {
+//            LOG.info("El turista buscado es: " + t);
+//            
+//        }
+//		//this.turistaService.obtenerTodosTuristas();
 		
-		this.turistaService.guardarTurista(tur1);
-		List<Turista> listaTurista = this.turistaService.obtenerTodosTuristas("Denis");
-        for(Turista t : listaTurista) {
-            LOG.info("El turista buscado es: " + t);
-            
-        }
-		//this.turistaService.obtenerTodosTuristas();
+		
+		//Taller 32
 
+		
+		CuentaBancaria c1 = new CuentaBancaria();
+		
+		c1.setClienteCedula("12313");
+		c1.setNumeroCuenta("121221");
+		c1.setSaldo(new BigDecimal(1000));
+		c1.setTipo("Ahorros");
+		
+		
+		CuentaBancaria c2 = new CuentaBancaria();
+		
+		c2.setClienteCedula("1721334555");
+		c2.setNumeroCuenta("41002120");
+		c2.setSaldo(new BigDecimal(100));
+		c2.setTipo("Corriente");
+		
 		
 	}
 
