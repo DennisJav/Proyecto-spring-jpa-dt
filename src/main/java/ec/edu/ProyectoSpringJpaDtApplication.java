@@ -256,23 +256,32 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 		//Taller 32
 
 		
-		CuentaBancaria c1 = new CuentaBancaria();
+//		CuentaBancaria c1 = new CuentaBancaria();
+//		
+//		c1.setClienteCedula("12313");
+//		c1.setNumeroCuenta("1234");
+//		c1.setSaldo(new BigDecimal(1000));
+//		c1.setTipo("Ahorros");
+//		
+//		this.cuentaBancariaService.crearCuentaBancaria(c1);
+//		
+//		CuentaBancaria c2 = new CuentaBancaria();
+//		
+//		c2.setClienteCedula("1721334555");
+//		c2.setNumeroCuenta("5678");
+//		c2.setSaldo(new BigDecimal(100));
+//		c2.setTipo("Corriente");
+//		
+//		this.cuentaBancariaService.crearCuentaBancaria(c2);
 		
-		c1.setClienteCedula("12313");
-		c1.setNumeroCuenta("121221");
-		c1.setSaldo(new BigDecimal(1000));
-		c1.setTipo("Ahorros");
+//		CuentaBancaria c3 = this.cuentaBancariaService.buscarCuentaBancariaNumero("1234");
+//		System.out.println("cuenta: "+ c3);
+
+		this.cuentaBancariaService.realizarTransferencia("1234", "5678", new BigDecimal(60));
 		
-		this.cuentaBancariaService.crearCuentaBancaria(c1);
 		
-		CuentaBancaria c2 = new CuentaBancaria();
 		
-		c2.setClienteCedula("1721334555");
-		c2.setNumeroCuenta("41002120");
-		c2.setSaldo(new BigDecimal(100));
-		c2.setTipo("Corriente");
 		
-		this.cuentaBancariaService.crearCuentaBancaria(c2);
 	}
 
 }
