@@ -56,11 +56,11 @@ public class CuentaBancariaServiceImpl implements ICuentaBancariaService{
         LOG.info("AA2");
       
         
-//        try {
+        try {
         this.actualizarCuenta2(cuentaDes);
-//        }catch (ArrayIndexOutOfBoundsException e) {
-//        	LOG.error("ERRROR");
-//		}
+        }catch (ArrayIndexOutOfBoundsException e) {
+        	LOG.error("ERRROR");
+		}
         
         LOG.info("DA2");
         

@@ -57,12 +57,12 @@ public class CuentaBancariaRepoImpl implements ICuentaBancariaRepo {
 	@Transactional
 	public void actualizarCuentaBancaria2(CuentaBancaria cuenta) {
 		this.entityManager.merge(cuenta);
-		try {
+//		try {
 			throw new ArrayIndexOutOfBoundsException();
-
-		}catch(ArrayIndexOutOfBoundsException e) {
-			LOG.error("ERROR REPO");
-		}
+//
+//		}catch(ArrayIndexOutOfBoundsException e) {
+//			LOG.error("ERROR REPO");
+//		}
 	}
 
 }
