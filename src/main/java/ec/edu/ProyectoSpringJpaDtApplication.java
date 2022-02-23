@@ -277,7 +277,7 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 //		CuentaBancaria c3 = this.cuentaBancariaService.buscarCuentaBancariaNumero("1234");
 //		System.out.println("cuenta: "+ c3);
 
-		this.cuentaBancariaService.realizarTransferencia("1234", "5678", new BigDecimal(60));
+		this.cuentaBancariaService.realizarTransferencia("1234", "5678", new BigDecimal(5));
 		
 		
 		

@@ -8,14 +8,20 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import ec.edu.ProyectoSpringJpaDtApplication;
 import ec.edu.modelo.jpa.CuentaBancaria;
 
 @Transactional
 @Repository
 public class CuentaBancariaRepoImpl implements ICuentaBancariaRepo {
 
+	public static final Logger LOG = LoggerFactory.getLogger(CuentaBancariaRepoImpl.class);
+
+	
 	@PersistenceContext
 	private EntityManager entityManager;
 
@@ -45,6 +51,18 @@ public class CuentaBancariaRepoImpl implements ICuentaBancariaRepo {
 	public void actualizarCuentaBancaria(CuentaBancaria cuenta) {
 		this.entityManager.merge(cuenta);
 
+	}
+
+	@Override
+	@Transactional
+	public void actualizarCuentaBancaria2(CuentaBancaria cuenta) {
+		this.entityManager.merge(cuenta);
+		try {
+			throw new ArrayIndexOutOfBoundsException();
+
+		}catch(ArrayIndexOutOfBoundsException e) {
+			LOG.error("ERROR REPO");
+		}
 	}
 
 }

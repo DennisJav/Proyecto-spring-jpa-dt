@@ -13,4 +13,5 @@ public interface ICuentaBancariaRepo {
 	void realizarTransferencia(String cuentaOrigen, String cuentaDestino, BigDecimal valorTransferir);
 	
 	void actualizarCuentaBancaria(CuentaBancaria cuenta);
+	void actualizarCuentaBancaria2(CuentaBancaria cuenta);
 }
