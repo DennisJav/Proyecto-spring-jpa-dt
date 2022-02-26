@@ -35,7 +35,7 @@ public class CuentaBancariaServiceImpl implements ICuentaBancariaService{
 	}
 
 	@Override
-	@Transactional
+	
 	public void realizarTransferencia(String cuentaOrigen, String cuentaDestino, BigDecimal valorTransferir) {
 		// TODO Auto-generated method stub
 		
@@ -51,7 +51,12 @@ public class CuentaBancariaServiceImpl implements ICuentaBancariaService{
       //  cuentaDes.setTipo(null);  //ERROR PROVOCADO
         
         LOG.info("AA1");
-        this.actualizarCuenta(cuentaOrig);
+        try {
+            this.actualizarCuenta(cuentaDes);
+            }catch (ArrayIndexOutOfBoundsException e) {
+            	LOG.error("ERRROR");
+    		}
+            LOG.info("DA2");
         LOG.info("DA1");
         LOG.info("AA2");
       
@@ -61,15 +66,11 @@ public class CuentaBancariaServiceImpl implements ICuentaBancariaService{
         }catch (ArrayIndexOutOfBoundsException e) {
         	LOG.error("ERRROR");
 		}
-        
         LOG.info("DA2");
         
         
         //SE CONTROLA PERO SI SE PROPAGA LA TRANSACCION HASTA EL FINAL
-        
-        
-  
-		
+
 	}
 
 	@Override
