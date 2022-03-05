@@ -31,6 +31,9 @@ public class CuentaBancariaRepoImpl implements ICuentaBancariaRepo {
 		// TODO Auto-generated method stub
 		this.entityManager.persist(cuentaBancaria);
 	}
+	
+
+	
 
 	@Override
 	public CuentaBancaria buscarCuentaBancariaNumero(String numero) {
@@ -49,14 +52,15 @@ public class CuentaBancariaRepoImpl implements ICuentaBancariaRepo {
 	}
 
 	@Override
+	@Transactional(value = TxType.MANDATORY)
 	public void actualizarCuentaBancaria(CuentaBancaria cuenta) {
 		this.entityManager.merge(cuenta);
-		throw new ArrayIndexOutOfBoundsException();
+	//	throw new ArrayIndexOutOfBoundsException();
 
 	}
 
 	@Override
-	@Transactional(value = TxType.REQUIRES_NEW)
+	@Transactional(value = TxType.MANDATORY)
 	public void actualizarCuentaBancaria2(CuentaBancaria cuenta) {
 		
 		this.entityManager.merge(cuenta);
@@ -67,5 +71,19 @@ public class CuentaBancariaRepoImpl implements ICuentaBancariaRepo {
 //			LOG.error("ERROR REPO");
 //		}
 	}
+	
+	
+	@Transactional(value = TxType.MANDATORY)
+	public void propagacionMandatory() {
+		LOG.info("Ejecucion mandatory");
+		
+		
+	}
 
+	@Transactional(value = TxType.NEVER)
+	public void enviarMail(String asunto) {
+		LOG.info("Se envia mail"+asunto);
+	}
+	
+	
 }

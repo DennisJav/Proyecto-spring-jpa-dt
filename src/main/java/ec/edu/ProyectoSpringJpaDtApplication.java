@@ -259,7 +259,7 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 //		CuentaBancaria c1 = new CuentaBancaria();
 //		
 //		c1.setClienteCedula("12313");
-//		c1.setNumeroCuenta("1234");
+//		c1.setNumeroCuenta("12345");
 //		c1.setSaldo(new BigDecimal(1000));
 //		c1.setTipo("Ahorros");
 //		
@@ -268,19 +268,30 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 //		CuentaBancaria c2 = new CuentaBancaria();
 //		
 //		c2.setClienteCedula("1721334555");
-//		c2.setNumeroCuenta("5678");
+//		c2.setNumeroCuenta("67890");
 //		c2.setSaldo(new BigDecimal(100));
 //		c2.setTipo("Corriente");
-//		
+////		
 //		this.cuentaBancariaService.crearCuentaBancaria(c2);
 		
-//		CuentaBancaria c3 = this.cuentaBancariaService.buscarCuentaBancariaNumero("1234");
+//		CuentaBancaria c3 = this.cuentaBancariaService.buscarCuentaBancariaNumero("12345");
 //		System.out.println("cuenta: "+ c3);
-
-		this.cuentaBancariaService.realizarTransferencia("1234", "5678", new BigDecimal(5));
+//
+//		this.cuentaBancariaService.realizarTransferencia("12345", "67890", new BigDecimal(5));
+//		
+//		TALLER 35
+	
+	//	this.cuentaBancariaService.realizarTransferencia("12345", "67890", new BigDecimal(5));
+//		this.cuentaBancariaService.propagacionMandatory();
+		//PRIMERERo
+		this.cuentaBancariaService.realizarTransferenciaExpressInicial("12345", "67890", new BigDecimal(5));
 		
+		//SEGUNDO
+		//aqui no hay el transaccion
+		//this.cuentaBancariaService.realizarTransferenciaExpressInicialNoT("12345", "67890", new BigDecimal(5));
 		
-		
+		//this.cuentaBancariaService.enviarEmail();
+		//this.cuentaBancariaService.enviarEmailNoT();
 		
 	}
 

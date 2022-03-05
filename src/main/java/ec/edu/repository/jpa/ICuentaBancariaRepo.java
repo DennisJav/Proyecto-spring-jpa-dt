@@ -14,4 +14,5 @@ public interface ICuentaBancariaRepo {
 	
 	void actualizarCuentaBancaria(CuentaBancaria cuenta);
 	void actualizarCuentaBancaria2(CuentaBancaria cuenta);
+	 void enviarMail(String asunto); 
 }

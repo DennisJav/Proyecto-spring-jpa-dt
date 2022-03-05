@@ -3,6 +3,7 @@ package ec.edu.service;
 import java.math.BigDecimal;
 
 import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,7 @@ public class CuentaBancariaServiceImpl implements ICuentaBancariaService{
 	}
 
 	@Override
+	@Transactional(value = TxType.NOT_SUPPORTED)
 	public CuentaBancaria buscarCuentaBancariaNumero(String numero) {
 		// TODO Auto-generated method stub
 		return this.cuentaBancariaRepo.buscarCuentaBancariaNumero(numero);
@@ -36,6 +38,7 @@ public class CuentaBancariaServiceImpl implements ICuentaBancariaService{
 
 	@Override
 	
+	@Transactional
 	public void realizarTransferencia(String cuentaOrigen, String cuentaDestino, BigDecimal valorTransferir) {
 		// TODO Auto-generated method stub
 		
@@ -50,23 +53,9 @@ public class CuentaBancariaServiceImpl implements ICuentaBancariaService{
         cuentaDes.setSaldo(nuevoSaldoDestino);
       //  cuentaDes.setTipo(null);  //ERROR PROVOCADO
         
-        LOG.info("AA1");
-        try {
-            this.actualizarCuenta(cuentaDes);
-            }catch (ArrayIndexOutOfBoundsException e) {
-            	LOG.error("ERRROR");
-    		}
-            LOG.info("DA2");
-        LOG.info("DA1");
-        LOG.info("AA2");
-      
-        
-        try {
+        this.actualizarCuenta(cuentaDes);
         this.actualizarCuenta2(cuentaDes);
-        }catch (ArrayIndexOutOfBoundsException e) {
-        	LOG.error("ERRROR");
-		}
-        LOG.info("DA2");
+
         
         
         //SE CONTROLA PERO SI SE PROPAGA LA TRANSACCION HASTA EL FINAL
@@ -89,6 +78,75 @@ public class CuentaBancariaServiceImpl implements ICuentaBancariaService{
 	}
 	
 	
+	
+	@Transactional(value = TxType.SUPPORTS)
+	public void propagacionSuport() {
+		
+		
+		
+		
+	}
+	
+	
+	@Transactional(value = TxType.MANDATORY)
+	public void propagacionMandatory() {
+		LOG.info("Ejecucion mandatory");
+		
+		
+	}
+	
+	@Transactional	
+	public void realizarTransferenciaExpressInicial(String cuentaOrigen, String cuentaDestino, BigDecimal valorTransferir) {
+		this.realizarTransferenciaExpress(cuentaOrigen, cuentaDestino, valorTransferir);
+	}
+	
+
+	
+	
+	/**
+	 * NO es transaccion porque le vamos a retirar para ejecutar el error o saber que sucede
+	 * @param cuentaOrigen
+	 * @param cuentaDestino
+	 * @param valorTransferir
+	 */
+	//SEGUNDO ESCENARIO
+	//@Transactional	
+	public void realizarTransferenciaExpressInicialNoT(String cuentaOrigen, String cuentaDestino, BigDecimal valorTransferir) {
+		this.realizarTransferenciaExpress(cuentaOrigen, cuentaDestino, valorTransferir);
+	}
+	
+	//@Transactional(value = TxType.SUPPORTS)
+	@Transactional(value = TxType.REQUIRES_NEW)
+	public void realizarTransferenciaExpress(String cuentaOrigen, String cuentaDestino, BigDecimal valorTransferir) {
+		// TODO Auto-generated method stub
+		LOG.info("EJECUCION SUPPORT");
+		
+		CuentaBancaria cuentaOrig = this.buscarCuentaBancariaNumero(cuentaOrigen);
+        CuentaBancaria cuentaDes = this.buscarCuentaBancariaNumero(cuentaDestino);
+
+        BigDecimal nuevoSaldoOrigen = cuentaOrig.getSaldo().subtract(valorTransferir);
+        cuentaOrig.setSaldo(nuevoSaldoOrigen);
+
+        BigDecimal nuevoSaldoDestino = cuentaDes.getSaldo().add(valorTransferir);
+        cuentaDes.setSaldo(nuevoSaldoDestino);
+
+        LOG.info("EJECUCION SUPPORT ANTES");
+        this.actualizarCuenta(cuentaOrig);
+        this.actualizarCuenta2(cuentaDes);
+        LOG.info("DESPUES DEL SUPPROT");
+
+	}
+	
+	@Transactional
+	public void enviarEmail() {
+		this.cuentaBancariaRepo.enviarMail("Correo de clase  TRANSACCION");
+	}
+	
+	
+	public void enviarEmailNoT() {
+		this.cuentaBancariaRepo.enviarMail("Correo de clase  NO TRANSACCION");
+
+	}
 	
 	
 }
