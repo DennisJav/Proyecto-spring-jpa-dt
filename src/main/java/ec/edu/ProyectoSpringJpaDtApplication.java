@@ -13,6 +13,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import ec.edu.interfaces.funcionales.IPersonaFunction;
+import ec.edu.interfaces.funcionales.IPersonaUnaryOperator;
 import ec.edu.modelo.Paciente;
 import ec.edu.modelo.Receta;
 import ec.edu.modelo.Turista;
@@ -24,6 +26,7 @@ import ec.edu.modelo.jpa.Empleado;
 import ec.edu.modelo.jpa.Factura;
 import ec.edu.modelo.jpa.FacturaSencilla;
 import ec.edu.modelo.jpa.Guardia;
+import ec.edu.service.CuentaFachadaServiceImpl;
 import ec.edu.service.ICiudadanoService;
 import ec.edu.service.IClienteService;
 import ec.edu.service.ICuentaBancariaService;
@@ -64,6 +67,15 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 	@Autowired
 	private ICuentaBancariaService cuentaBancariaService;
 
+	//private IPersonaUnaryOperator<String> personaUnaryOperator;
+	
+	//private IPersonaFunction<String, Paciente> personaFunction;
+	
+//	private IPersonaFunction<String, String> personaFunction1;
+
+	@Autowired
+	private CuentaFachadaServiceImpl cuentaFachadaServiceImpl;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoSpringJpaDtApplication.class, args);
 	}
@@ -284,7 +296,7 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 	//	this.cuentaBancariaService.realizarTransferencia("12345", "67890", new BigDecimal(5));
 //		this.cuentaBancariaService.propagacionMandatory();
 		//PRIMERERo
-		this.cuentaBancariaService.realizarTransferenciaExpressInicial("12345", "67890", new BigDecimal(5));
+//		this.cuentaBancariaService.realizarTransferenciaExpressInicial("12345", "67890", new BigDecimal(5));
 		
 		//SEGUNDO
 		//aqui no hay el transaccion
@@ -292,6 +304,16 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 		
 		//this.cuentaBancariaService.enviarEmail();
 		//this.cuentaBancariaService.enviarEmailNoT();
+		
+		this.cuentaFachadaServiceImpl.realizarTransferenciaExpressInicialNoT("12345", "67890", new BigDecimal(5));
+		
+		//Taller 36
+		
+//		String prueba = this.personaUnaryOperator.apply("tipo String");
+//		
+//		Paciente p1 = this.personaFunction.apply("B");
+//		
+//		String prueba1 =  this.personaFunction1.apply("Tipo String retorno");
 		
 	}
 

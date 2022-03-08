@@ -16,7 +16,7 @@ public interface ICuentaBancariaService {
 	void realizarTransferenciaExpressInicial(String cuentaOrigen, String cuentaDestino, BigDecimal valorTransferir);
 	void realizarTransferenciaExpressInicialNoT(String cuentaOrigen, String cuentaDestino, BigDecimal valorTransferir);
 	
-	
+
 	void enviarEmail();
 	void enviarEmailNoT();
 	

@@ -110,13 +110,18 @@ public class CuentaBancariaServiceImpl implements ICuentaBancariaService{
 	 * @param valorTransferir
 	 */
 	//SEGUNDO ESCENARIO
-	//@Transactional	
+	//@Transactional(value = TxType.REQUIRES_NEW)	
 	public void realizarTransferenciaExpressInicialNoT(String cuentaOrigen, String cuentaDestino, BigDecimal valorTransferir) {
 		this.realizarTransferenciaExpress(cuentaOrigen, cuentaDestino, valorTransferir);
 	}
 	
+	
+	
+	
 	//@Transactional(value = TxType.SUPPORTS)
+	
 	@Transactional(value = TxType.REQUIRES_NEW)
+	
 	public void realizarTransferenciaExpress(String cuentaOrigen, String cuentaDestino, BigDecimal valorTransferir) {
 		// TODO Auto-generated method stub
 		LOG.info("EJECUCION SUPPORT");
