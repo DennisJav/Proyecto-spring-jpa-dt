@@ -13,22 +13,29 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import ec.edu.interfaces.funcionales.IPersonaFunction;
+import ec.edu.interfaces.funcionales.IPersonaUnaryOperator;
 import ec.edu.modelo.Paciente;
 import ec.edu.modelo.Receta;
+import ec.edu.modelo.Turista;
 import ec.edu.modelo.jpa.Ciudadano;
 import ec.edu.modelo.jpa.Cliente;
+import ec.edu.modelo.jpa.CuentaBancaria;
 import ec.edu.modelo.jpa.DetalleFactura;
 import ec.edu.modelo.jpa.Empleado;
 import ec.edu.modelo.jpa.Factura;
 import ec.edu.modelo.jpa.FacturaSencilla;
 import ec.edu.modelo.jpa.Guardia;
+import ec.edu.service.CuentaFachadaServiceImpl;
 import ec.edu.service.ICiudadanoService;
 import ec.edu.service.IClienteService;
+import ec.edu.service.ICuentaBancariaService;
 import ec.edu.service.IDetalleFacturaService;
 import ec.edu.service.IFacturaService;
 import ec.edu.service.IGestorCitaService;
 import ec.edu.service.IGuardiaService;
 import ec.edu.service.IPacienteService;
+import ec.edu.service.ITuristaService;
 
 @SpringBootApplication
 public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
@@ -53,7 +60,22 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 	
 	@Autowired 
 	private IClienteService clienteService;
+	
+	@Autowired
+	private ITuristaService turistaService;
+	
+	@Autowired
+	private ICuentaBancariaService cuentaBancariaService;
 
+	//private IPersonaUnaryOperator<String> personaUnaryOperator;
+	
+	//private IPersonaFunction<String, Paciente> personaFunction;
+	
+//	private IPersonaFunction<String, String> personaFunction1;
+
+	@Autowired
+	private CuentaFachadaServiceImpl cuentaFachadaServiceImpl;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoSpringJpaDtApplication.class, args);
 	}
@@ -198,31 +220,100 @@ public class ProyectoSpringJpaDtApplication implements CommandLineRunner {
 //		
 		
 		//TALLER 26
+//		
+//		
+//		 //FETCH
+//		System.out.println("SELECT CON FETCH");
+//		LocalDateTime miFecha = LocalDateTime.of(1989, Month.AUGUST,8,2,5);
+//		List<Factura> listaFactura = this.facturaService.buscarFacturaJoinFetch(miFecha);
+//
+//		List<DetalleFactura> listaDetalleFacturas = this.detalleFacturaService.buscarDetallePorPrecio(new BigDecimal(7) , miFecha);
+//
+//		//COLECTION
+//		System.out.println("COLECCION");
+//		Cliente cliente=new Cliente();
+//		cliente.setNombre("Javier");
+//		List<String> tel = new ArrayList<>();
+//		tel.add("0963321015");
+//		tel.add("222565651");
+//		
+//		cliente.setTelefonos(tel);
+//		
+//		this.clienteService.guardarCliente(cliente);
+//		
+//		
+//		//FACTURATO
+//		System.out.println("FACTURA SENCILLA");
+//		List<FacturaSencilla> listaFacSencilla = this.facturaService.buscarFacturaSencilla(miFecha);
 		
 		
-		 //FETCH
-		System.out.println("SELECT CON FETCH");
-		LocalDateTime miFecha = LocalDateTime.of(1989, Month.AUGUST,8,2,5);
-		List<Factura> listaFactura = this.facturaService.buscarFacturaJoinFetch(miFecha);
+		//Taller 27
+		
+//		Turista tur1=new Turista();
+//		tur1.setNombre("Denis");
+//		//tur1.setSaldo(new BigDecimal(121));
+//		tur1.setAbono(new BigDecimal(12));
+//		tur1.setValor(new BigDecimal(110));
+//				
+//		
+//		this.turistaService.guardarTurista(tur1);
+//		List<Turista> listaTurista = this.turistaService.obtenerTodosTuristas("Denis");
+//        for(Turista t : listaTurista) {
+//            LOG.info("El turista buscado es: " + t);
+//            
+//        }
+//		//this.turistaService.obtenerTodosTuristas();
+		
+		
+		//Taller 32
 
-		List<DetalleFactura> listaDetalleFacturas = this.detalleFacturaService.buscarDetallePorPrecio(new BigDecimal(7) , miFecha);
-
-		//COLECTION
-		System.out.println("COLECCION");
-		Cliente cliente=new Cliente();
-		cliente.setNombre("Javier");
-		List<String> tel = new ArrayList<>();
-		tel.add("0963321015");
-		tel.add("222565651");
 		
-		cliente.setTelefonos(tel);
+//		CuentaBancaria c1 = new CuentaBancaria();
+//		
+//		c1.setClienteCedula("12313");
+//		c1.setNumeroCuenta("12345");
+//		c1.setSaldo(new BigDecimal(1000));
+//		c1.setTipo("Ahorros");
+//		
+//		this.cuentaBancariaService.crearCuentaBancaria(c1);
+//		
+//		CuentaBancaria c2 = new CuentaBancaria();
+//		
+//		c2.setClienteCedula("1721334555");
+//		c2.setNumeroCuenta("67890");
+//		c2.setSaldo(new BigDecimal(100));
+//		c2.setTipo("Corriente");
+////		
+//		this.cuentaBancariaService.crearCuentaBancaria(c2);
 		
-		this.clienteService.guardarCliente(cliente);
+//		CuentaBancaria c3 = this.cuentaBancariaService.buscarCuentaBancariaNumero("12345");
+//		System.out.println("cuenta: "+ c3);
+//
+//		this.cuentaBancariaService.realizarTransferencia("12345", "67890", new BigDecimal(5));
+//		
+//		TALLER 35
+	
+	//	this.cuentaBancariaService.realizarTransferencia("12345", "67890", new BigDecimal(5));
+//		this.cuentaBancariaService.propagacionMandatory();
+		//PRIMERERo
+//		this.cuentaBancariaService.realizarTransferenciaExpressInicial("12345", "67890", new BigDecimal(5));
 		
+		//SEGUNDO
+		//aqui no hay el transaccion
+		//this.cuentaBancariaService.realizarTransferenciaExpressInicialNoT("12345", "67890", new BigDecimal(5));
 		
-		//FACTURATO
-		System.out.println("FACTURA SENCILLA");
-		List<FacturaSencilla> listaFacSencilla = this.facturaService.buscarFacturaSencilla(miFecha);
+		//this.cuentaBancariaService.enviarEmail();
+		//this.cuentaBancariaService.enviarEmailNoT();
+		
+		this.cuentaFachadaServiceImpl.realizarTransferenciaExpressInicialNoT("12345", "67890", new BigDecimal(5));
+		
+		//Taller 36
+		
+//		String prueba = this.personaUnaryOperator.apply("tipo String");
+//		
+//		Paciente p1 = this.personaFunction.apply("B");
+//		
+//		String prueba1 =  this.personaFunction1.apply("Tipo String retorno");
 		
 	}
 
