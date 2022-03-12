@@ -2,6 +2,11 @@ package ec.edu.interfaces.funcionales;
 
 public class ConsumoInterfacesFuncionales {
 
+	
+	//Metodos High Order
+	//Metodos que reciben una funcion /  comportamiento
+	//Metodos High Order Functions
+	
 	public String consumirInterfaz(IPersonaSupplier<String> funcion) {
 
 		return funcion.get();
